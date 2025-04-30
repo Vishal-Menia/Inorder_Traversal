@@ -1,0 +1,225 @@
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    color: white;
+    margin: 0;
+    padding: 15px;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+h1 {
+    color: #4cc9f0;
+    text-shadow: 0 0 10px rgba(76, 201, 240, 0.5);
+    margin-bottom: 15px;
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    text-align: center;
+}
+
+.tree-container {
+    position: relative;
+    width: 100%;
+    height: 50vh;
+    min-height: 300px;
+    max-height: 500px;
+    margin-bottom: 15px;
+}
+
+.tree {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+.node {
+    position: absolute;
+    width: clamp(40px, 8vw, 50px);
+    height: clamp(40px, 8vw, 50px);
+    border-radius: 50%;
+    background: #f72585;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+    font-size: clamp(14px, 3vw, 18px);
+    box-shadow: 0 0 15px rgba(247, 37, 133, 0.7);
+    transition: all 0.3s;
+    z-index: 10;
+    cursor: pointer;
+    user-select: none;
+}
+
+.node.highlight {
+    background: #4cc9f0;
+    transform: scale(1.2);
+    box-shadow: 0 0 20px rgba(76, 201, 240, 0.9);
+}
+
+.node.falling {
+    animation: fall 1s forwards;
+    z-index: 20;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(calc(100vh - 200px)) scale(0.9);
+        opacity: 0.9;
+    }
+}
+
+.connector {
+    position: absolute;
+    background: #7209b7;
+    height: 2px;
+    transform-origin: 0 0;
+    z-index: 1;
+}
+
+.traversal-display {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    min-height: 80px;
+    width: 95%;
+    max-width: 800px;
+    margin-top: 15px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    border: 1px solid #4cc9f0;
+}
+
+.traversal-node {
+    width: clamp(40px, 8vw, 50px);
+    height: clamp(40px, 8vw, 50px);
+    border-radius: 50%;
+    background: #7209b7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: clamp(14px, 3vw, 18px);
+    opacity: 0;
+    transform: scale(0);
+    animation: appear 0.5s forwards;
+}
+
+@keyframes appear {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 15px 0;
+    justify-content: center;
+    width: 100%;
+    max-width: 500px;
+}
+
+button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    background: #7209b7;
+    color: white;
+    font-weight: bold;
+    font-size: clamp(14px, 3vw, 16px);
+    cursor: pointer;
+    transition: all 0.3s;
+    flex: 1 1 auto;
+    min-width: 120px;
+}
+
+button:hover {
+    background: #f72585;
+    transform: translateY(-2px);
+}
+
+button:disabled {
+    background: #555;
+    cursor: not-allowed;
+}
+
+.input-group {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    width: 100%;
+    max-width: 300px;
+}
+
+input {
+    padding: 8px;
+    border-radius: 5px;
+    border: none;
+    width: 60px;
+    flex: 1;
+    font-size: clamp(14px, 3vw, 16px);
+}
+
+.instructions {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    width: 95%;
+    max-width: 600px;
+    text-align: center;
+    font-size: clamp(14px, 3vw, 16px);
+}
+
+@media (max-width: 600px) {
+    .tree-container {
+        height: 40vh;
+    }
+    
+    .controls {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    button {
+        width: 100%;
+        max-width: 200px;
+    }
+    
+    .input-group {
+        max-width: 250px;
+    }
+}
+
+@media (max-width: 400px) {
+    .node, .traversal-node {
+        width: 35px;
+        height: 35px;
+        font-size: 12px;
+    }
+    
+    .tree-container {
+        height: 35vh;
+    }
+}
